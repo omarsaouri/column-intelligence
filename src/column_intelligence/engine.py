@@ -12,7 +12,6 @@ class ColumnIntelligenceEngine:
         Analyze a column and return inferred metadata.
         """
 
-        # Placeholder implementation (v0.1.0 foundation)
         signals = ColumnSignals()
 
         return ColumnMetadata(
