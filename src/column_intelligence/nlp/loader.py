@@ -1,4 +1,4 @@
-# loader.py
+from semantic_anchors import SEMANTIC_ANCHORS
 
 _nlp = None
 
@@ -17,3 +17,10 @@ def get_nlp():
         _nlp = spacy.load("en_core_web_md")
 
     return _nlp
+
+
+def build_anchor_vectors(nlp):
+    return {
+        category: [nlp(term).vector for term in terms]
+        for category, terms in SEMANTIC_ANCHORS.items()
+    }

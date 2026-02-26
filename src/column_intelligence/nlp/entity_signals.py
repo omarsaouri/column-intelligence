@@ -2,7 +2,7 @@ from loader import get_nlp
 import random
 
 
-def compute_person_entity_ratio(
+def compute_entity_ratio(
     values: list[str], entity: str, max_sample_size: int = 1000
 ) -> float:
     if not values:
