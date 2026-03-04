@@ -1,4 +1,4 @@
-from loader import get_nlp
+from .loader import load_spacy_model
 import random
 
 
@@ -11,13 +11,14 @@ def compute_entity_ratio(
     if len(values) > max_sample_size:
         values = random.sample(values, max_sample_size)
 
-    nlp = get_nlp()
-    person_count = 0
+    nlp = load_spacy_model()
+    entity_count = 0
+
     non_null_count = sum(
-        1 for v in values if v is not None or (isinstance(v, str) and v.strip() != "")
+        1 for v in values if v is not None and isinstance(v, str) and v.strip() != ""
     )
 
     for doc in nlp.pipe(values, batch_size=32):
         if any(ent.label_ == entity for ent in doc.ents):
-            person_count += 1
-    return person_count / non_null_count
+            entity_count += 1
+    return entity_count / non_null_count

@@ -33,11 +33,17 @@ def compute_non_null_ratio(values: List[Any]) -> float:
     return non_null_count / total_rows
 
 
-# HELPER FUNCTIONS
-
-
 def compute_null_count(values: List[Any]) -> int:
     """Calculate the number of missing (null) values."""
     if not values:
         return 0
     return sum(1 for v in values if v is None)
+
+
+def compute_structural_signals(values: List[Any]) -> dict[str, float]:
+    return {
+        "row_count": compute_row_count(values),
+        "non_null_count": compute_non_null_count(values),
+        "null_ratio": compute_null_ratio(values),
+        "non_null_ratio": compute_non_null_ratio(values),
+    }

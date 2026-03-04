@@ -74,3 +74,15 @@ def compute_hex_pattern_ratio(values: list[str]) -> float:
         if isinstance(v, str) and hex_pattern.match(v):
             hex_count += 1
     return hex_count / len(values)
+
+
+def compute_alphanumeric_signals(values: list[str]) -> dict[str, float]:
+    return {
+        "alphanumeric_ratio": compute_alphanumeric_ratio(values),
+        "special_char_ratio": compute_special_char_ratio(values),
+        "starts_with_digit_ratio": compute_starts_with_digit_ratio(values),
+        "ends_with_digit_ratio": compute_ends_with_digit_ratio(values),
+        "contains_symbol_ratio": compute_contains_symbol_ratio(values),
+        "uuid_pattern_ratio": compute_uuid_pattern_ratio(values),
+        "hex_pattern_ratio": compute_hex_pattern_ratio(values),
+    }

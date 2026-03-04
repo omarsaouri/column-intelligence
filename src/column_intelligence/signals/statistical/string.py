@@ -198,7 +198,7 @@ def compute_alpha_char_ratio(values: List[str]) -> float:
 
 
 # Convenience function to compute all statistics at once
-def compute_all_string_statistics(values: List[str]) -> dict:
+def compute_string_signals(values: List[str]) -> dict:
     """
     Compute all string statistics at once.
 

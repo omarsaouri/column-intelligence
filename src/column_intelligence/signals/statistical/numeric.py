@@ -86,3 +86,14 @@ def compute_zero_ratio(values: list[Any]) -> float:
         except (ValueError, TypeError):
             continue
     return zero_count / len(values)
+
+
+def compute_numeric_signals(values: list[Any]) -> dict[str, float]:
+    return {
+        "numeric_ratio": compute_numeric_ratio(values),
+        "integer_ratio": compute_integer_ratio(values),
+        "float_ratio": compute_float_ratio(values),
+        "positive_ratio": compute_positive_ratio(values),
+        "negative_ratio": compute_negative_ratio(values),
+        "zero_ratio": compute_zero_ratio(values),
+    }

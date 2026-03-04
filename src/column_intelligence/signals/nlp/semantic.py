@@ -60,9 +60,3 @@ def best_category(
             max_category = category
 
     return {"Category": max_category, "Score": max_similarity}
-
-
-column_vec = get_column_vector("user_id", get_nlp())
-anchor_vecs = get_anchor_vecs()
-result = best_category(column_vec, anchor_vecs)
-print(result)

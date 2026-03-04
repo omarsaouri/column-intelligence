@@ -149,3 +149,20 @@ def _compute_percentile(values: List[str], percentile: float) -> float:
     return (
         sorted_values[lower_idx] * (1 - fraction) + sorted_values[upper_idx] * fraction
     )
+
+
+def compute_distribution_signals(values: List[str]) -> dict[str, float]:
+    """Compute all numeric-related signals."""
+    return {
+        "mean": compute_mean(values),
+        "median": compute_median(values),
+        "std_dev": compute_std_dev(values),
+        "min_value": compute_min_value(values),
+        "max_value": compute_max_value(values),
+        "range": compute_range(values),
+        "skewness": compute_skewness(values),
+        "kurtosis": compute_kurtosis(values),
+        "percentile_25": compute_percentile_25(values),
+        "percentile_50": compute_percentile_50(values),
+        "percentile_75": compute_percentile_75(values),
+    }

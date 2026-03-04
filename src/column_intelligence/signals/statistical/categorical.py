@@ -28,3 +28,11 @@ def category_balance_score(values: list[str]) -> float:
     raw_entropy = -sum(p * log2(p) for p in probs if p > 0)
     max_entropy = log2(n_unique)
     return raw_entropy / max_entropy  # closer to 1 = perfectly balanced
+
+
+def compute_categorical_signals(values: list[str]) -> dict[str, float]:
+    return {
+        "low_cardinality_ratio": low_cardinality_ratio(values),
+        "dominant_category_ratio": dominant_category_ratio(values),
+        "category_balance_score": category_balance_score(values),
+    }

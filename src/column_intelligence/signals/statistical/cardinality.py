@@ -77,3 +77,16 @@ def compute_most_frequent_value(values: List[Any]) -> Any:
         return None, 0
     counter = Counter(values)
     return counter.most_common(1)[0]
+
+
+def compute_cardinality_signals(values: List[Any]) -> Dict[str, Any]:
+    """Compute all cardinality-related signals."""
+    return {
+        "unique_count": compute_unique_count(values),
+        "unique_ratio": compute_unique_ratio(values),
+        "duplicate_ratio": compute_duplicate_ratio(values),
+        "most_frequent_ratio": compute_most_frequent_ratio(values),
+        "entropy": compute_entropy(values),
+        "most_frequent_value": compute_most_frequent_value(values)[0],
+        "most_frequent_count": compute_most_frequent_value(values)[1],
+    }

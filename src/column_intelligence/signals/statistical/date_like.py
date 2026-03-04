@@ -35,3 +35,12 @@ def compute_time_component_ratio(values: list[str]) -> float:
     if not values:
         return 0.0
     return sum(1 for v in values if ":" in v) / len(values)
+
+
+def compute_date_like_signals(values: list[str]) -> dict[str, float]:
+    return {
+        "date_parse_success_ratio": compute_date_parse_success_ratio(values),
+        "year_range_span": compute_year_range_span(values),
+        "monotonic_increasing_ratio": compute_monotonic_increasing_ratio(values),
+        "time_component_ratio": compute_time_component_ratio(values),
+    }

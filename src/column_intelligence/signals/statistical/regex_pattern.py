@@ -103,3 +103,15 @@ def compute_credit_card_pattern_ratio(values: list[str]) -> float:
         1 for v in values if v is not None or (isinstance(v, str) and v.strip() != "")
     )
     return credit_card_count / non_null_count if non_null_count > 0 else 0.0
+
+
+def compute_regex_pattern_signals(values: list[str]) -> dict[str, float]:
+    return {
+        "email_pattern_ratio": compute_email_pattern_ratio(values),
+        "phone_number_pattern_ratio": compute_phone_number_pattern_ratio(values),
+        "url_pattern_ratio": compute_url_pattern_ratio(values),
+        "uuid_pattern_ratio": compute_uuid_pattern_ratio(values),
+        "date_pattern_ratio": compute_date_pattern_ratio(values),
+        "percentage_pattern_ratio": compute_percentage_pattern_ratio(values),
+        "credit_card_pattern_ratio": compute_credit_card_pattern_ratio(values),
+    }

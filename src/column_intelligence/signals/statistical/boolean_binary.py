@@ -15,3 +15,11 @@ def compute_boolean_string_ratio(values: list[str]) -> float:
     if not values:
         return 0.0
     return sum(1 for v in values if v.lower() in {"true", "false"}) / len(values)
+
+
+def compute_boolean_binary_signals(values: list[str]) -> dict[str, float]:
+    return {
+        "binary_ratio": compute_binary_ratio(values),
+        "distinct_values_count": compute_distinct_values_count(values),
+        "boolean_string_ratio": compute_boolean_string_ratio(values),
+    }

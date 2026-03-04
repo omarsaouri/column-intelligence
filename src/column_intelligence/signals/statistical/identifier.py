@@ -73,3 +73,12 @@ def compute_high_cardinality_low_entropy_pattern(values: list[str]) -> float:
         "normalized_entropy": round(normalized_entropy, 4),
         "concentration_ratio": round(coverage_ratio, 4),
     }
+
+
+def compute_identifier_signals(values: list[str]) -> dict[str, float]:
+    return {
+        "constant_length_ratio": compute_constant_length_ratio(values),
+        "sequential_ratio": compute_sequential_ratio(values),
+        "no_withspace_ratio": compute_no_withspace_ratio(values),
+        **compute_high_cardinality_low_entropy_pattern(values),
+    }
