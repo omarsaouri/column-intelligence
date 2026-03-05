@@ -1,5 +1,8 @@
 from typing import List, Dict
 
+from column_intelligence.signals.nlp.loader import get_anchor_vecs, get_nlp
+from column_intelligence.signals.nlp.semantic import compute_name_similarity_signals
+from column_intelligence.signals.nlp.semantic_anchors import SEMANTIC_ANCHORS
 from column_intelligence.signals.statistical.alphanumeric import (
     compute_alphanumeric_signals,
 )
@@ -34,6 +37,18 @@ from column_intelligence.signals.statistical.structural import (
 from column_intelligence.signals.nlp.entity_signals import compute_entity_ratio
 
 
+SPACY_NER_LABELS = [
+    "PERSON",
+    "ORG",
+    "GPE",
+    "LOC",
+    "DATE",
+    "TIME",
+    "MONEY",
+    "QUANTITY",
+]
+
+
 def compute_all_signals(values: List[str], column_name: str) -> Dict[str, float]:
     signals = {}
 
@@ -49,24 +64,10 @@ def compute_all_signals(values: List[str], column_name: str) -> Dict[str, float]
     signals.update(compute_distribution_signals(values))
     signals.update(compute_structural_signals(values))
 
-    for entity in [
-        "person",
-        "email",
-        "phone",
-        "location",
-        "id",
-        "money",
-        "url",
-        "date",
-        "boolean",
-        "category",
-    ]:
+    for entity in SPACY_NER_LABELS:
+        signals[f"{entity.lower()}_entity_ratio"] = compute_entity_ratio(values, entity)
 
-        signals[f"entity_ratio_{entity}"] = compute_entity_ratio(values, entity)
+    anchor_vecs = get_anchor_vecs()
+    signals.update(compute_name_similarity_signals(column_name, anchor_vecs, get_nlp()))
 
     return signals
-
-
-print(
-    compute_all_signals(["abc", "123", "a1b2", "xyz!", "000-111-222"], "example_column")
-)

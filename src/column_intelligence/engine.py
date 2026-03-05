@@ -1,5 +1,7 @@
 from typing import List
 from .types import ColumnMetadata, ColumnSignals
+from .signals.orchestrator import compute_all_signals
+from .semantic.decision_engine import decide_column_type
 
 
 class ColumnIntelligenceEngine:
@@ -11,12 +13,12 @@ class ColumnIntelligenceEngine:
         """
         Analyze a column and return inferred metadata.
         """
-
-        signals = ColumnSignals()
+        signals = compute_all_signals(values, column_name)
+        decision = decide_column_type(signals)
 
         return ColumnMetadata(
             column_name=column_name,
-            inferred_type="UNKNOWN",
-            confidence=0.0,
-            signals=signals,
+            inferred_type=decision["predicted_type"],
+            confidence=decision["confidence"],
+            signals=decision["scores"],
         )

@@ -13,4 +13,9 @@ SEMANTIC_ANCHORS = {
     "location": ["city", "country", "address", "location", "state", "zipcode"],
     "time": ["date", "timestamp", "created", "updated", "time"],
     "identifier": ["id", "uuid", "key", "identifier"],
+    "email": ["email", "e-mail", "contact", "mail"],
+    "phone": ["phone", "mobile", "contact number", "tel"],
+    "url": ["url", "link", "website", "uri"],
+    "boolean": ["is_", "has_", "flag", "boolean", "bool", "active", "enabled"],
+    "category": ["category", "type", "class", "group", "segment"],
 }
